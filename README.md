@@ -18,3 +18,5 @@ let mut state = [Goldilocks::ZERO; 12];
 // Permute the state using Poseidon2
 poseidon.permute_mut(&mut state);
 ``` 
+
+NOTE: this crate used to be part of the `qp-poseidon` repo, but moved to its own repo since version 1.0.2
