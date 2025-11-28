@@ -1,0 +1,36 @@
+[package]
+name = "qp-poseidon-constants"
+version = "0.1.0"
+authors = ["Quantus Network Developers <hello@quantus.com>"]
+homepage = "https://quantus.com"
+repository = "https://github.com/Quantus-Network/qp-poseidon-constants"
+license = "MIT-0"
+edition = "2021"
+description = "Precomputed Poseidon2 constants for Goldilocks field"
+
+keywords = [
+	"cryptography",
+	"hash-functions",
+	"no-std",
+	"poseidon",
+	"quantus-network",
+]
+categories = ["cryptography", "no-std"]
+
+[dependencies]
+p3-field = { version = "0.3.0", default-features = false }
+p3-goldilocks = { version = "0.3.0", default-features = false }
+p3-poseidon2 = { version = "0.3.0", default-features = false }
+rand = { version = "0.9", default-features = false, features = ["small_rng"] }
+rand_chacha = { version = "0.9", default-features = false }
+
+[dev-dependencies]
+p3-symmetric = { version = "0.3.0", default-features = false }
+
+[features]
+default = []
+std = []
+
+[[bin]]
+name = "extract_constants"
+path = "build_helpers/extract_constants.rs"
