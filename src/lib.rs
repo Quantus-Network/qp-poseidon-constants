@@ -5,6 +5,49 @@
 
 extern crate alloc;
 
+// ============================================================================
+// Poseidon2 Sponge Parameters
+// ============================================================================
+
+/// Width of the Poseidon2 sponge (number of field elements in state).
+pub const SPONGE_WIDTH: usize = 12;
+
+/// Rate of the sponge construction (number of field elements absorbed per permutation).
+/// With WIDTH=12 and RATE=8, the capacity is 4 field elements.
+pub const SPONGE_RATE: usize = 8;
+
+/// Capacity of the sponge (security parameter = WIDTH - RATE).
+pub const SPONGE_CAPACITY: usize = SPONGE_WIDTH - SPONGE_RATE;
+
+/// Number of output field elements in a Poseidon2 hash digest.
+pub const POSEIDON2_OUTPUT: usize = 4;
+
+/// Number of internal (partial) rounds in the Poseidon2 permutation.
+pub const POSEIDON2_INTERNAL_ROUNDS: usize = 22;
+
+/// Number of external (full) rounds in the Poseidon2 permutation (4 initial + 4 terminal).
+pub const POSEIDON2_EXTERNAL_ROUNDS: usize = 8;
+
+/// Seed used to derive Poseidon2 round constants (digits of pi).
+pub const POSEIDON2_SEED: u64 = 0x3141592653589793;
+
+/// Diagonal matrix constants for Poseidon2 internal diffusion layer (WIDTH=12).
+/// These match `MATRIX_DIAG_12_GOLDILOCKS` from p3-goldilocks.
+pub const POSEIDON2_MATRIX_DIAG_12_RAW: [u64; 12] = [
+	0xc3b6c08e23ba9300,
+	0xd84b5de94a324fb6,
+	0x0d0c371c5b35b84f,
+	0x7964f570e7188037,
+	0x5daf18bbd996604b,
+	0x6743bc47b9595257,
+	0x5528b9362c59bb70,
+	0xac45e25b7127b68b,
+	0xa2077d7dfbb606b5,
+	0xf3faac6faee378ae,
+	0x0c6388b51545e883,
+	0xd27dbb6944917b60,
+];
+
 use alloc::vec::Vec;
 use p3_field::integers::QuotientMap;
 use p3_goldilocks::{Goldilocks, Poseidon2Goldilocks};
@@ -201,8 +244,6 @@ mod tests {
 	use p3_field::PrimeCharacteristicRing;
 	use p3_symmetric::Permutation;
 	use rand_chacha::{rand_core::SeedableRng, ChaCha20Rng};
-
-	const POSEIDON2_SEED: u64 = 0x3141592653589793;
 
 	#[test]
 	fn test_hardcoded_matches_derived() {
