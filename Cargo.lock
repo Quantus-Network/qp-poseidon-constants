@@ -199,7 +199,7 @@ dependencies = [
 
 [[package]]
 name = "qp-poseidon-constants"
-version = "1.0.3"
+version = "0.1.0"
 dependencies = [
  "p3-field",
  "p3-goldilocks",
