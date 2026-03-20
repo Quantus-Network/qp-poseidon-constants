@@ -1,6 +1,6 @@
 [package]
 name = "qp-poseidon-constants"
-version = "0.0.1"
+version = "1.0.3"
 authors = ["Quantus Network Developers <hello@quantus.com>"]
 homepage = "https://quantus.com"
 repository = "https://github.com/Quantus-Network/qp-poseidon-constants"
